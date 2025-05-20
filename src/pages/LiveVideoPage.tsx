@@ -66,46 +66,48 @@ const LiveVideoPage: React.FC = () => {
         </div>
         
         {/* Área principal de video */}
-        <div className={`bg-asphalt rounded-lg overflow-hidden h-full ${isFullscreen ? 'fixed inset-0 z-50' : 'relative'}`}>
-          {streamsLoading || streamLoading ? (
-            <div className="flex justify-center items-center h-96">
-              <Loader />
-            </div>
-          ) : streamsError || streamError ? (
-            <div className="flex flex-col items-center justify-center h-96 bg-asphalt text-white">
-              <p className="text-red-400 mb-4">
-                {streamsError || streamError}
-              </p>
-              <button 
-                className="px-4 py-2 bg-capri text-white rounded"
-                onClick={() => window.location.reload()}
-              >
-                Reintentar
-              </button>
-            </div>
-          ) : !selectedCamera ? (
-            <div className="flex flex-col items-center justify-center h-96 bg-asphalt text-white">
-              <p className="text-gray-400">
-                Selecciona una cámara para ver la transmisión en vivo
-              </p>
-            </div>
-          ) : (
-            <div className="relative">
-              <LiveStream cameraId={selectedCamera} />
-              
-              {/* Información de detección */}
-              {stream && stream.detectedObjects && (
-                <div className="absolute top-4 right-4 bg-black bg-opacity-70 text-white p-2 rounded">
-                  <p className="text-sm font-medium">Objetos detectados:</p>
-                  <ul className="text-xs">
-                    {stream.detectedObjects.map((object, index) => (
-                      <li key={index}>{object}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          )}
+        <div className={`relative bg-asphalt rounded-lg overflow-hidden ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
+          <div className='aspect-video h-auto max-h-[80vh]'> 
+            {streamsLoading || streamLoading ? (
+              <div className="absolute inset-0 flex justify-center items-center">
+                <Loader />
+              </div>
+            ) : streamsError || streamError ? (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-asphalt text-white">
+                <p className="text-red-400 mb-4">
+                  {streamsError || streamError}
+                </p>
+                <button 
+                  className="px-4 py-2 bg-capri text-white rounded hover:bg-capridark"
+                  onClick={() => window.location.reload()}
+                >
+                  Reintentar
+                </button>
+              </div>
+            ) : !selectedCamera ? (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-asphalt text-white">
+                <p className="text-gray-400">
+                  Selecciona una cámara para ver la transmisión en vivo
+                </p>
+              </div>
+            ) : (
+              <div className="w-full h-full">
+                <LiveStream cameraId={selectedCamera} />
+                
+                {/* Información de detección */}
+                {stream && stream.detectedObjects && (
+                  <div className="absolute top-4 right-4 bg-black bg-opacity-70 text-white p-2 rounded">
+                    <p className="text-sm font-medium">Objetos detectados:</p>
+                    <ul className="text-xs">
+                      {stream.detectedObjects.map((object, index) => (
+                        <li key={index}>{object}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+          </div> 
         </div>
         
         {/* Información adicional */}

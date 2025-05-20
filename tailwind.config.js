@@ -12,10 +12,10 @@ export default {
         capri: '#00BFFF',
         whitegray: '#F2F3F5',
         // Variantes de los colores principales
-        'capri-light': '#66D9FF',
-        'capri-dark': '#0099CC',
-        'asphalt-light': '#2D2525',
-        'asphalt-dark': '#070202',
+        caprilight: '#66D9FF',
+        capridark: '#0099CC',
+        asphaltlight: '#2D2525',
+        asphaltdark: '#070202',
       }
     }
   },

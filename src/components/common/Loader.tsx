@@ -20,9 +20,9 @@ export const Loader: React.FC<LoaderProps> = ({
   
   // Determinar color del loader
   const colorClasses = {
-    primary: 'border-blue-500 border-t-transparent',
+    primary: 'border-capri border-t-transparent',
     white: 'border-white border-t-transparent',
-    gray: 'border-gray-300 border-t-transparent'
+    gray: 'border-whitegray border-t-transparent'
   };
   
   return (
