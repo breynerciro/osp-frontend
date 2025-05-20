@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 interface VideoPlayerProps {
   streamUrl: string;
@@ -7,22 +7,66 @@ interface VideoPlayerProps {
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ streamUrl, isPlaying }) => {
-  const videoRef = useRef<HTMLImageElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [lastFrameUrl, setLastFrameUrl] = useState<string | null>(null);
+  
+  useEffect(() => {
+    // Configurar una nueva imagen para capturar el frame
+    if (isPlaying) {
+      const captureImg = new Image();
+      captureImg.crossOrigin = "anonymous";
+      
+      captureImg.onload = () => {
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = captureImg.naturalWidth || 640;
+          canvas.height = captureImg.naturalHeight || 480;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(captureImg, 0, 0);
+          setLastFrameUrl(canvas.toDataURL('image/jpeg'));
+        } catch (e) {
+          console.error('Error al capturar frame:', e);
+        }
+      };
+      
+      // Asignar la URL después de configurar crossOrigin
+      captureImg.src = streamUrl;
+    }
+  }, [isPlaying, streamUrl]);
 
-  // Para el caso de Flask, usamos una imagen que se actualiza constantemente
-  // en lugar de un elemento video, ya que estamos usando multipart/x-mixed-replace
   return (
-    <div ref={containerRef} className="relative w-full">
-      <img 
-        ref={videoRef}
-        src={streamUrl} 
-        alt="Video en vivo"
-        className="w-full h-auto"
-        style={{ display: isPlaying ? 'block' : 'none' }}
-      />
+    <div ref={containerRef} className="w-full h-full object-contain">
+      {/* Imagen del stream en vivo */}
+      {isPlaying && (
+        <img 
+          ref={imgRef}
+          src={streamUrl}
+          alt="Video en vivo"
+          crossOrigin="anonymous"
+          className="w-full h-auto"
+        />
+      )}
+      
+      {/* Imagen congelada cuando está pausado */}
+      {!isPlaying && lastFrameUrl && (
+        <img 
+          src={lastFrameUrl}
+          alt="Video pausado"
+          className="w-full h-auto"
+        />
+      )}
+      
+      {/* Fallback cuando no hay imagen disponible */}
+      {!isPlaying && !lastFrameUrl && (
+        <div className="w-full h-64 bg-gray-900 flex items-center justify-center">
+          <p className="text-white">No se pudo capturar la imagen</p>
+        </div>
+      )}
+      
+      {/* Icono de play cuando está pausado */}
       {!isPlaying && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             className="h-16 w-16 text-white" 

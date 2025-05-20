@@ -3,12 +3,9 @@ import VideoPlayer from './VideoPlayer';
 import VideoControls from './VideoControls';
 import { useVideoStream } from '../../hooks/useVideoStream';
 import LoadingSpinner from '../common/LoadingSpinner';
+import type { Stream } from '../../types/video.types';
 
-interface LiveStreamProps {
-  cameraId: string;
-}
-
-const LiveStream: React.FC<LiveStreamProps> = ({ cameraId }) => {
+const LiveStream: React.FC<Stream> = ({ cameraId }) => {
   const { streamUrl, isLoading, error } = useVideoStream(cameraId);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(false);
@@ -63,20 +60,22 @@ const LiveStream: React.FC<LiveStreamProps> = ({ cameraId }) => {
   }
 
   return (
-    <div className="relative bg-black rounded-lg overflow-hidden">
-      <VideoPlayer 
-        streamUrl={streamUrl} 
-        isPlaying={isPlaying}
-        isMuted={isMuted}
-      />
-      <VideoControls 
-        isPlaying={isPlaying} 
-        isMuted={isMuted} 
-        isFullscreen={isFullscreen}
-        onPlayPause={handlePlayPause}
-        onMute={handleMute}
-        onFullscreen={handleFullscreen}
-      />
+    <div className='flex justify-center items-center min-h-[78vh]'>
+      <div className="relative bg-black rounded-lg max-w-[105vh] max-h-[79vh] aspect-[4/3] w-full h-full">
+        <VideoPlayer 
+          streamUrl={streamUrl} 
+          isPlaying={isPlaying}
+          isMuted={isMuted}
+        />
+        <VideoControls 
+          isPlaying={isPlaying} 
+          isMuted={isMuted} 
+          isFullscreen={isFullscreen}
+          onPlayPause={handlePlayPause}
+          onMute={handleMute}
+          onFullscreen={handleFullscreen}
+        />
+      </div>
     </div>
   );
 };

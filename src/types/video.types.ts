@@ -1,4 +1,3 @@
-// src/types/video.types.ts
 export interface Stream {
   id: string;
   name: string;

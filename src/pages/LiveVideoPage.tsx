@@ -36,8 +36,6 @@ const LiveVideoPage: React.FC = () => {
   return (
     <DashboardLayout>
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-6">Video en Vivo</h1>
-        
         {loading ? (
           <div className="flex justify-center items-center h-64">
             <LoadingSpinner />
@@ -67,7 +65,7 @@ const LiveVideoPage: React.FC = () => {
             </div>
 
             {selectedCamera ? (
-              <LiveStream cameraId={selectedCamera} />
+              <LiveStream cameraId={selectedCamera} id={''} name={''} url={''} status={'error'} />
             ) : (
               <div className="text-center py-12 bg-gray-50 rounded-lg">
                 <p className="text-gray-500">Selecciona una cámara para ver la transmisión en vivo</p>
