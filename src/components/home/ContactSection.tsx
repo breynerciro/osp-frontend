@@ -52,8 +52,8 @@ const ContactSection: React.FC = () => {
     <section id="contact" className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Contacto</h2>
-          <div className="w-16 h-1 bg-blue-600 mx-auto"></div>
+          <h2 className="text-3xl font-bold text-asphalt mb-4">Contacto</h2>
+          <div className="w-16 h-1 bg-capri mx-auto"></div>
           <p className="mt-4 text-lg text-gray-600">¿Tiene preguntas sobre OSP? Contáctenos</p>
         </div>
         
@@ -66,40 +66,40 @@ const ContactSection: React.FC = () => {
           
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Nombre</label>
+              <label htmlFor="name" className="block text-asphalt font-medium mb-2">Nombre</label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-capri"
                 required
               />
             </div>
             
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email</label>
+              <label htmlFor="email" className="block text-asphalt font-medium mb-2">Email</label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-capri"
                 required
               />
             </div>
             
             <div className="mb-6">
-              <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Mensaje</label>
+              <label htmlFor="message" className="block text-asphalt font-medium mb-2">Mensaje</label>
               <textarea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 rows={5}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-capri"
                 required
               ></textarea>
             </div>
@@ -108,7 +108,7 @@ const ContactSection: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-blue-600 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 disabled:opacity-70"
+                className="bg-asphalt text-white font-medium py-3 px-8 rounded-lg shadow-md hover:bg-capri transition duration-300 disabled:opacity-70"
               >
                 {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
               </button>

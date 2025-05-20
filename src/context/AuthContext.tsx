@@ -52,7 +52,7 @@ export const AuthContext = createContext<AuthContextType>({
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const loginWithProvider = async (provider: string) => {
+  const loginWithProvider = async () => {
     // Simulación de usuario autenticado
     const mockUser: User = {
       id: 'user-123',

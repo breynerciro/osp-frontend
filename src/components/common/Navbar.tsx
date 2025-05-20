@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import NavItem from './NavItem';
 import useAuth from '../../hooks/useAuth';
+import Logo from '../../assets/Logo.svg';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isAuthenticated, loginWithProvider } = useAuth();
+  const { isAuthenticated, loginWithProvider, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ const Navbar: React.FC = () => {
       // Simulamos un inicio de sesión automático
       await loginWithProvider('direct');
       // Redirigimos al dashboard
-      navigate('/dashboard');
+      navigate('/');
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
     }
@@ -34,22 +35,25 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="text-xl font-bold text-blue-600">OSP</span>
-            <span className="ml-2 text-gray-700">Sentinel</span>
+            <img src={Logo} alt="Logo" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <NavItem to="/" label="Inicio" active={location.pathname === '/'} onClick={closeMenu} />
+          <div className="hidden md:flex items-center space-x-8 text-capri">
+            <NavItem 
+              to="/" 
+              label="Inicio" 
+              active={location.pathname === '/'} 
+              onClick={closeMenu}
+            />
             
             {isAuthenticated ? (
               <>
-                <NavItem to="/dashboard" label="Dashboard" active={location.pathname === '/dashboard'} onClick={closeMenu} />
                 <NavItem to="/live" label="Video en Vivo" active={location.pathname === '/live'} onClick={closeMenu} />
-                <NavItem to="/recordings" label="Grabaciones" active={location.pathname === '/recordings'} onClick={closeMenu} />
+                {/*<NavItem to="/recordings" label="Grabaciones" active={location.pathname === '/recordings'} onClick={closeMenu} />*/}
                 <button 
-                  onClick={useAuth().logout}
-                  className="text-gray-700 hover:text-blue-600 transition duration-300"
+                  onClick={logout}
+                  className="text-asphalt hover:text-capri transition duration-300"
                 >
                   Cerrar Sesión
                 </button>
@@ -57,7 +61,7 @@ const Navbar: React.FC = () => {
             ) : (
               <button 
                 onClick={handleDirectLogin}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+                className="bg-capri text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
               >
                 Iniciar Sesión
               </button>
@@ -68,7 +72,7 @@ const Navbar: React.FC = () => {
           <div className="md:hidden">
             <button 
               onClick={toggleMenu} 
-              className="text-gray-700 hover:text-blue-600 focus:outline-none"
+              className="text-asphalt hover:text-capri focus:outline-none"
             >
               {isMenuOpen ? (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -90,15 +94,14 @@ const Navbar: React.FC = () => {
             
             {isAuthenticated ? (
               <>
-                <NavItem to="/dashboard" label="Dashboard" active={location.pathname === '/dashboard'} onClick={closeMenu} mobile />
                 <NavItem to="/live" label="Video en Vivo" active={location.pathname === '/live'} onClick={closeMenu} mobile />
-                <NavItem to="/recordings" label="Grabaciones" active={location.pathname === '/recordings'} onClick={closeMenu} mobile />
+                {/* <NavItem to="/recordings" label="Grabaciones" active={location.pathname === '/recordings'} onClick={closeMenu} mobile /> */}
                 <button 
                   onClick={() => {
-                    useAuth().logout();
+                    logout();
                     closeMenu();
                   }}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition duration-300"
+                  className="block w-full text-left px-4 py-2 text-asphalt hover:bg-gray-100 hover:text-capri transition duration-300"
                 >
                   Cerrar Sesión
                 </button>

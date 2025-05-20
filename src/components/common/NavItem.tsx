@@ -13,13 +13,13 @@ const NavItem: React.FC<NavItemProps> = ({ to, label, active, onClick, mobile = 
   const baseClasses = "transition duration-300";
   
   const desktopClasses = active 
-    ? "text-blue-600 font-medium" 
-    : "text-gray-700 hover:text-blue-600";
+    ? "text-capri font-medium" 
+    : "text-asphalt hover:text-capri";
   
   const mobileClasses = "block w-full px-4 py-2 text-left hover:bg-gray-100";
   const mobileActiveClasses = active 
-    ? "text-blue-600 font-medium" 
-    : "text-gray-700 hover:text-blue-600";
+    ? "text-capri font-medium" 
+    : "text-asphalt hover:text-capri";
 
   const classes = mobile 
     ? `${baseClasses} ${mobileClasses} ${mobileActiveClasses}` 

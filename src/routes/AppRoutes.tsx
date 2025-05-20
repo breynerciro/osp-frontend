@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
-//import LiveVideoPage from '../pages/LiveVideoPage';
+import LiveVideoPage from '../pages/LiveVideoPage';
 //import NotFoundPage from '../pages/NotFoundPage';
-//import PrivateRoute from './PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -13,12 +13,9 @@ const AppRoutes: React.FC = () => {
       
       {/* Rutas privadas */}
       <Route path="/live" element={
-        // <PrivateRoute>
-        //   <LiveVideoPage />
-        // </PrivateRoute>
-        <div>
-            No Video
-        </div>
+        <PrivateRoute>
+           <LiveVideoPage />
+        </PrivateRoute>
       } />
       
       {/* Redirección al home */}
