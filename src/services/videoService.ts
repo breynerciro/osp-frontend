@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { Stream, Recording, Zone, StreamStats, StreamSettings } from '../types/video.types';
 
-//const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+//const API_URL = process.env.BACK_API_URL;
 
 // Helper function to get auth token
 const getAuthHeaders = () => {
