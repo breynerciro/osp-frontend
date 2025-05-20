@@ -12,17 +12,19 @@ const AboutUs: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <p className="text-lg text-asphalt mb-6">
             OSP (Overwatch Sentinel Platform) es una plataforma de software para la vigilancia automatizada 
-            basada en visión por computadora, diseñada para funcionar sobre hardware de bajo consumo como Raspberry Pi.
+            basada en visión por computadora, diseñada para funcionar sobre hardware de bajo consumo.
           </p>
           
           <p className="text-lg text-asphalt mb-6">
-            Utiliza la implementación pi-tensorflow-lite-object-detection, la cual permite detectar objetos 
-            definidos previamente dentro del campo visual de la cámara. El sistema permite configurar un área 
-            específica dentro de la imagen -conocida como "zona segura"- que delimita el espacio de vigilancia.
+            Este proyecto construye un sistema de detección de objetos en tiempo real utilizando una Raspberry Pi y una cámara. 
+            Captura vídeo en directo, lo procesa con un modelo TensorFlow Lite para detectar objetos específicos y guarda los eventos importantes como archivos de vídeo. 
+            Para gestionar estas tareas de forma eficiente, utiliza computación paralela con subprocesos. El sistema proporciona alertas visuales mediante LED y sonoras a través de un zumbador, 
+            mostrando su capacidad para controlar acciones del mundo real, que también puede ampliarse para gestionar circuitos o enviar señales. 
+            Para la supervisión en tiempo real se crea un servidor de red local que permite a los usuarios ver vídeo en directo, acceder a grabaciones guardadas y revisar registros sin problemas.
           </p>
           
           <p className="text-lg text-asphalt">
-            Cuando un objeto de interés entra en dicha zona, el sistema activa automáticamente la grabación de video. 
+            Cuando un objeto de interés entra en la zona segura, el sistema activa automáticamente la grabación de video. 
             De este modo, se optimiza el uso de recursos, ya que solo se almacena material cuando se detecta actividad relevante.
           </p>
         </div>
